@@ -1,0 +1,497 @@
+﻿<UserControl x:Class="StudentBook.View.StudentBookView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StudentBook.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="1050" d:DesignWidth="800">
+    <Grid>
+        <materialDesign:Card Margin="10"
+            Background="{DynamicResource MaterialDesignPaper}"
+            Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Padding="10"
+            Opacity="0.9">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="studentBookPanel">
+                    <Label Content="Студенческая книга производственного обучения" HorizontalAlignment="Center" FontSize="20"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <ToggleButton IsChecked="{Binding IsSelected}"
+                                Style="{StaticResource MaterialDesignActionLightToggleButton}"
+                                Content="{Binding Path=CurrentUser.FirstLetter}"/>
+                        <StackPanel Margin="8 0 0 0" Grid.Column="1">
+                            <TextBlock Text="{Binding Path=CurrentUser.FullName}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Path=CurrentUser.UserType}"/>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="lastNameTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Фамилия"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center"
+                                Text ="{Binding Path=CurrentStudentLastName, UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
+                        <TextBox x:Name="firstNameTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Имя"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam">
+                            <TextBox.Text>
+                                <Binding Path="CurrentStudentFirstName" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="patronymicTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Отчество"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentStudentPatronymic" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <TextBox x:Name="facultyTextBox" Margin="10"
+                            wpf:HintAssist.Hint="Факультет"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            materialDesign:HintAssist.IsFloating="True"
+                            materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                            materialDesign:ValidationAssist.Background="IndianRed"
+                            materialDesign:ValidationAssist.HasError="False"
+                            FontSize="14" Cursor="IBeam"
+                            VerticalAlignment="Center">
+                        <TextBox.Text>
+                            <Binding Path="CurrentFaculty" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                <Binding.ValidationRules>
+                                    <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="specialityTextBox" Margin="10"
+                                Width="370"
+                                wpf:HintAssist.Hint="Специальность"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentSpeciality" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="groupTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Группа"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentGroup" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="railwayTextBox" Margin="10 30 10 10"
+                                Width="280"
+                                wpf:HintAssist.Hint="Железная дорога"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentRailway" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="locationTextBox" Margin="10 30 10 10"
+                                Width="280"
+                                wpf:HintAssist.Hint="Место прохождения"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentPlace" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker x:Name="startDatePicker"
+                                Margin="10"
+                                Width="270"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:HintAssist.Hint="Фактическая дата начала практики"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                SelectedDate="{Binding CurrentStartDate, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DatePicker x:Name="endDatePicker"
+                                Margin="10"
+                                Width="270"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:HintAssist.Hint="Фактическая дата окончания практики"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                SelectedDate="{Binding CurrentEndDate, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <Label Content="Отзыв предприятия" HorizontalAlignment="Center" FontSize="18"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Работа, выполненная студентом:" FontSize="16" Margin="10"/>
+                        <StackPanel Orientation="Vertical">
+                            <TextBox x:Name="work1TextBox"
+                                Width="270"
+                                wpf:HintAssist.Hint="Работа #1"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentWork1" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                        <Binding.ValidationRules>
+                                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox x:Name="work2TextBox"
+                                Width="270"
+                                wpf:HintAssist.Hint="Работа #2"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentWork2" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                        <Binding.ValidationRules>
+                                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox x:Name="work3TextBox"
+                                Width="270"
+                                wpf:HintAssist.Hint="Работа #3"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentWork3" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                        <Binding.ValidationRules>
+                                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBox x:Name="relationTextBox" Margin="10"
+                            wpf:HintAssist.Hint="Отношение к труду, дисциплина, инициатива"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            materialDesign:HintAssist.IsFloating="True"
+                            materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                            materialDesign:ValidationAssist.Background="IndianRed"
+                            materialDesign:ValidationAssist.HasError="False"
+                            FontSize="14" Cursor="IBeam">
+                        <TextBox.Text>
+                            <Binding Path="CurrentRelation" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                <Binding.ValidationRules>
+                                    <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Квалификационный экзамен на присвоение рабочей специальности" HorizontalAlignment="Center" FontSize="18"/>
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker x:Name="issueDateDatePicker"
+                                Margin="10"
+                                Width="180"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:HintAssist.Hint="Дата выдачи свидетельства"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                SelectedDate="{Binding CurrentIssueDate, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox x:Name="numberTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Номер квалификационного свидетельства"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam">
+                            <TextBox.Text>
+                                <Binding Path="CurrentNumber" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="rankTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Разряд специальности"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                FontSize="14" Cursor="IBeam">
+                            <TextBox.Text>
+                                <Binding Path="CurrentRank" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <Label Content="Руководитель практики от производства" HorizontalAlignment="Left" FontSize="15" Margin="10 10 10 0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="lastNameProductionHeadTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Фамилия"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center"
+                                Text ="{Binding Path=CurrentProductionHeadLastName, UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
+                        <TextBox x:Name="firstNameProductionHeadTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Имя"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam">
+                            <TextBox.Text>
+                                <Binding Path="CurrentProductionHeadFirstName" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="patronymicProductionHeadTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Отчество"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentProductionHeadPatronymic" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <Label Content="Руководитель практики от кафедры" HorizontalAlignment="Left" FontSize="15" Margin="10 10 10 0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="lastNameChairHeadTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Фамилия"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center"
+                                Text ="{Binding Path=CurrentChairHeadLastName, UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
+                        <TextBox x:Name="firstNameChairHeadTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Имя"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam">
+                            <TextBox.Text>
+                                <Binding Path="CurrentChairHeadFirstName" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="patronymicChairHeadTextBox" Margin="10"
+                                Width="180"
+                                wpf:HintAssist.Hint="Отчество"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentChairHeadPatronymic" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="positionTextBox" Margin="10"
+                                Width="330"
+                                wpf:HintAssist.Hint="Должность"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentPosition" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="telNumberTextBox" Margin="10"
+                                Width="220"
+                                wpf:HintAssist.Hint="Номер телефона"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentTelNumber" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <Label Content="Оценка кафедры по практике" HorizontalAlignment="Left" FontSize="15" Margin="10 10 10 0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="digitTextBox" Margin="10"
+                                Width="330"
+                                wpf:HintAssist.Hint="Цифрой"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentDigit" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="stringDigitTextBox" Margin="10"
+                                Width="220"
+                                wpf:HintAssist.Hint="Прописью"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                                materialDesign:ValidationAssist.Background="IndianRed"
+                                materialDesign:ValidationAssist.HasError="False"
+                                FontSize="14" Cursor="IBeam"
+                                VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="CurrentStringDigit" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="False">
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <Button Name="submitButton" Grid.Row="1" Content="Подтвердить" Margin="5"
+                            materialDesign:ButtonAssist.CornerRadius="15"
+                            Command="{Binding CloseStudentBookCommand}"
+                            Cursor="Hand"/>
+                </StackPanel>
+            </ScrollViewer>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

@@ -1,0 +1,30 @@
+﻿<Window x:Class="StudentBook.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentBook"
+        xmlns:uc="clr-namespace:StudentBook.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local1="clr-namespace:StudentBook.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignDarkBackground}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.DataContext>
+        <local1:StudentBookViewModel/>
+    </Window.DataContext>
+    <Grid>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/Textures/Background2.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <ContentControl Content="{Binding ContentControlView}"/>
+    </Grid>
+</Window>
